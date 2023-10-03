@@ -1,6 +1,7 @@
 import 'package:adaptive_navigation/adaptive_navigation.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:client_food/core/router/router.gr.dart';
+import 'package:client_food/core/theme.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
@@ -14,7 +15,12 @@ class NavPage extends StatelessWidget {
       builder: (context, child) {
         final tabsRouter = AutoTabsRouter.of(context);
         return AdaptiveNavigationScaffold(
-          body: child,
+          body: MediaQuery(
+            data: MediaQuery.of(context).copyWith(
+              textScaleFactor: ScaleSize.textScaleFactor(context),
+            ),
+            child: child,
+          ),
           onDestinationSelected: tabsRouter.setActiveIndex,
           selectedIndex: tabsRouter.activeIndex,
           destinations: const [
